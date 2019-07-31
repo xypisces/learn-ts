@@ -4,9 +4,10 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
 const express = require('express')
 const bodyParse = require('body-parser')
-
 const app = express()
 const compiler = webpack(WebpackConfig)
+
+const router = require('./router')
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: '/__build__/',
@@ -22,14 +23,6 @@ app.use(express.static(__dirname))
 
 app.use(bodyParse.json())
 app.use(bodyParse.urlencoded({ extended: true }))
-
-const router = express.Router()
-
-router.get('/simple/get', function (req, res) {
-  res.json({
-    msg: `hello,xuyu!`
-  })
-})
 
 app.use(router)
 
