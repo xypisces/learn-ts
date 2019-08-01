@@ -16,4 +16,12 @@ router.post('/base/post', function (req, res) {
   res.json(req.body)
 })
 
+router.post('/error/timeout', function (req, res) {
+  setTimeout(()=> {
+    res.json({
+      mesg:'hello,world'
+    })
+  }, 4000)
+})
+
 module.exports = router
